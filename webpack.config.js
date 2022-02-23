@@ -1,8 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackLiveReload = require('html-webpack-live-reload-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
@@ -34,25 +33,25 @@ module.exports = {
             },
             {
             test: /\.(scss)$/,
-            use: [{
-                loader: 'style-loader', // inject CSS to page
-            }, {
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        // options: {
+                        //     publicPath: './', // 指定公共路徑
+                        // },
+            },
+            {
                 loader: 'css-loader', // translates CSS into CommonJS modules
-            }, {
-                loader: 'postcss-loader', // Run post css actions
                 options: {
-                    postcssOptions: {
-                        // postcss plugins, can be exported to postcss.config.js
-                        plugins: function () {
-                        return [
-                            require('autoprefixer')
-                        ];
-                        }
-                    }
+                    sourceMap: true
                 }
-            }, {
-                loader: 'sass-loader' // compiles Sass to CSS
-                },
+            }, 
+            {
+                loader: 'sass-loader', // compiles Sass to CSS
+                options: {
+                    sourceMap: true
+                }
+            },
             ]
             },
             {
@@ -64,11 +63,15 @@ module.exports = {
     plugins: [//這邊以下是新增
         // new webpack.HotModuleReplacementPlugin(),
         // new HtmlWebpackPlugin({
-        //     template:"./index.html"
+        //     template: "./src/index.html",
+        //     filename: 'index.html',
         // }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'//這邊以上是新增
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css'
         })
     ]
 }
