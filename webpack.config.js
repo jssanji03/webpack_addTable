@@ -64,6 +64,7 @@ module.exports = {
         // new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             publicPath: "./",
+            template:"./src/index.html"
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
