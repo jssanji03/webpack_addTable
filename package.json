@@ -11,6 +11,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-standard": "^5.0.0",
+    "gh-pages": "^3.2.3",
     "html-webpack-live-reload-plugin": "^1.0.12",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.5.3",
@@ -28,7 +29,9 @@
     "watch": "webpack --watch",
     "start": "webpack serve --open",
     "dev": "webpack-dev-server --config webpack.config.js",
-    "build": "webpack"
+    "build": "webpack",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.2",
@@ -43,5 +46,6 @@
     "postcss-loader": "^6.2.1",
     "serve": "^13.0.2"
   },
-  "main": "webpack.config.js"
+  "main": "webpack.config.js",
+  "homepage": "https://jssanji03.github.io/webpack_addTable"
 }
