@@ -62,10 +62,9 @@ module.exports = {
     },
     plugins: [//這邊以下是新增
         // new webpack.HotModuleReplacementPlugin(),
-        // new HtmlWebpackPlugin({
-        //     template: "./src/index.html",
-        //     filename: 'index.html',
-        // }),
+        new HtmlWebpackPlugin({
+            publicPath: "./",
+        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'//這邊以上是新增
