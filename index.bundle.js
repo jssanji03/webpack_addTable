@@ -8736,58 +8736,76 @@ var formContent = document.querySelector(".js-content");
 var formCheck = document.querySelectorAll("input[name=OK-check]");
 var formPublish = document.querySelectorAll("input[name=Options]");
 var inputs = document.querySelectorAll("input[type=text],input[type=number],input[type=date],select,textarea");
+var constraints = {
+  "日期": {
+    presence: {
+      message: "必填欄位"
+    }
+  },
+  "部門": {
+    presence: {
+      message: "必填欄位"
+    }
+  },
+  "客戶名稱": {
+    presence: {
+      message: "必填欄位"
+    }
+  },
+  "地址": {
+    presence: {
+      message: "必填欄位"
+    }
+  },
+  "內容": {
+    presence: {
+      message: "必填欄位"
+    }
+  }
+};
 
 var addForm = function add() {
   addFormToList.addEventListener("click", checkNewTicket);
 };
 
-function checkNewTicket() {
-  var constraints = {
-    "日期": {
-      presence: {
-        message: "必填欄位"
-      }
-    },
-    "部門": {
-      presence: {
-        message: "必填欄位"
-      }
-    },
-    "客戶名稱": {
-      presence: {
-        message: "必填欄位"
-      }
-    },
-    "地址": {
-      presence: {
-        message: "必填欄位"
-      }
-    },
-    "內容": {
-      presence: {
-        message: "必填欄位"
-      }
-    }
-  };
+function handleFormSubmit(formArea, input) {
+  var errors = validate(formArea, constraints); // validate the form aainst the constraints
+
+  showErrors(form, errors || {}); // then we update the form to reflect the results
+
+  if (!errors) {
+    addNewList();
+  }
+} // Updates the inputs with the validation errors
+
+
+function showErrors(form, errors) {
+  // We loop through all the inputs and show the errors for that input
+  _.each(form.querySelectorAll("input[name], select[name]"), function (input) {
+    // Since the errors can be null if no errors were found we need to handle
+    // that
+    showErrorsForInput(input, errors && errors[input.name]);
+  });
+}
+
+function checkNewTicket(e) {
+  e.preventDefault();
 
   if (formDate.value == "" || formDept.value == "" || formCustomer.value == "" || formAddress.value == "" || formContent.value == "" || formCheck.value == "" || formPublish.value == "") {
     inputs.forEach(function (item) {
       //呈現在畫面上
-      item.nextElementSibling.textContent = "";
       var errors = validate(formArea, constraints);
 
       if (errors) {
-        // console.log(Object.keys(errors)) //keys -> 屬性
+        item.nextElementSibling.textContent = ""; // console.log(Object.keys(errors)) //keys -> 屬性
+
         Object.keys(errors).forEach(function (keys) {
           document.querySelector("[data-message=\"".concat(keys, "\"]")).textContent = errors[keys];
         });
       }
 
       item.addEventListener("change", function () {
-        console.log(!errors);
-
         if (errors) {
-          // console.log(Object.keys(errors)) //keys -> 屬性
           item.nextElementSibling.textContent = "";
         }
       });
@@ -42988,8 +43006,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-/* harmony import */ var datatables_net_dt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! datatables.net-dt */ "./node_modules/datatables.net-dt/js/dataTables.dataTables.js");
-/* harmony import */ var datatables_net_dt__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(datatables_net_dt__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var datatables_net__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jquery.dataTables.js");
+/* harmony import */ var datatables_net__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(datatables_net__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var datatables_net_responsive_dt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! datatables.net-responsive-dt */ "./node_modules/datatables.net-responsive-dt/js/responsive.dataTables.js");
 /* harmony import */ var datatables_net_responsive_dt__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(datatables_net_responsive_dt__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _fortawesome_fontawesome_free_js_all__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/fontawesome-free/js/all */ "./node_modules/@fortawesome/fontawesome-free/js/all.js");
