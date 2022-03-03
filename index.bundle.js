@@ -8550,20 +8550,62 @@ function withinMaxClamp(min, value, max) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "dataTableResponsive": () => (/* binding */ dataTableResponsive)
+/* harmony export */   "dataTableRWD": () => (/* binding */ dataTableRWD),
+/* harmony export */   "addCart": () => (/* binding */ addCart)
 /* harmony export */ });
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-var dataTableResponsive = function dataTableResponsive() {
-  $('.datatable-RWD').DataTable({
-    responsive: true,
-    searching: false,
-    "paging": false,
-    "ordering": false,
-    "info": false,
-    "autoWidth": true,
-    scroller: true
+var dataTableRWD = $('.datatable-RWD').DataTable({
+  responsive: true,
+  searching: false,
+  "paging": false,
+  "ordering": false,
+  "info": false,
+  "autoWidth": true,
+  scroller: true
+});
+
+var addCart = function addCart() {
+  var plus = document.querySelector(".js-add");
+  var minus = document.querySelector(".js-minus");
+  var display = document.querySelector(".js-num");
+  var counterVal = 1;
+  plus.addEventListener("click", function () {
+    if (counterVal >= 10) {
+      return false;
+    } else {
+      // minus.disabled=false;
+      displayMode(counterVal += 1);
+    }
   });
+  minus.addEventListener("click", function () {
+    if (counterVal <= 0) {
+      // minus.disabled=true;
+      return false;
+    } else {
+      displayMode(counterVal -= 1); // plus.disabled=false;
+    }
+  });
+
+  function displayMode(counterVal) {
+    btnDisplay();
+    display.value = counterVal;
+  }
+
+  function btnDisplay() {
+    if (counterVal >= 10) {
+      plus.disabled = true;
+    } else if (counterVal <= 0) {
+      minus.disabled = true;
+    } else {
+      plus.disabled = false;
+      minus.disabled = false;
+    }
+  }
+
+  displayMode(counterVal);
 };
+
+
 
 /***/ }),
 
@@ -8768,26 +8810,6 @@ var addForm = function add() {
   addFormToList.addEventListener("click", checkNewTicket);
 };
 
-function handleFormSubmit(formArea, input) {
-  var errors = validate(formArea, constraints); // validate the form aainst the constraints
-
-  showErrors(form, errors || {}); // then we update the form to reflect the results
-
-  if (!errors) {
-    addNewList();
-  }
-} // Updates the inputs with the validation errors
-
-
-function showErrors(form, errors) {
-  // We loop through all the inputs and show the errors for that input
-  _.each(form.querySelectorAll("input[name], select[name]"), function (input) {
-    // Since the errors can be null if no errors were found we need to handle
-    // that
-    showErrorsForInput(input, errors && errors[input.name]);
-  });
-}
-
 function checkNewTicket(e) {
   e.preventDefault();
 
@@ -8837,7 +8859,7 @@ function addNewList() {
   data.push(obj);
   console.log(data);
   init();
-  (0,_js_component__WEBPACK_IMPORTED_MODULE_0__.dataTableResponsive)();
+  _js_component__WEBPACK_IMPORTED_MODULE_0__.dataTableRWD;
   formArea.reset();
 }
 
@@ -43017,6 +43039,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_sidebar__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_js_sidebar__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _js_menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/menu */ "./src/js/menu.js");
 /* harmony import */ var _pages_addTable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/addTable */ "./src/pages/addTable.js");
+/* harmony import */ var _js_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/component */ "./src/js/component.js");
 //import js套件
 
 
@@ -43025,6 +43048,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  //import 共用 js
+
 
 
 
