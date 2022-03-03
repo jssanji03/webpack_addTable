@@ -8890,5 +8890,27 @@ table {
   color: red;
   font-size: 11px; }
 
+.price {
+  text-align: center;
+  border: 1px solid #949494; }
+
+.custom-btn {
+  border: 1px solid #949494; }
+  .custom-btn:hover {
+    background-color: #b8b8b8;
+    color: #FFF; }
+  .custom-btn:disabled {
+    background-color: #6b6b6b; }
+
+/* Chrome, Safari, Edge, Opera */
+input.price::-webkit-outer-spin-button,
+input.price::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+/* Firefox */
+input.price {
+  -moz-appearance: textfield; }
+
 
 /*# sourceMappingURL=app.css.map*/
