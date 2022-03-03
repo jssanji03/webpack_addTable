@@ -5,7 +5,6 @@ import 'datatables.net';
 import 'datatables.net-responsive-dt';
 
 //import scss
-import '@fortawesome/fontawesome-free/js/all'
 import './scss/index.scss';
 
 //import 共用 js
