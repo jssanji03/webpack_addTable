@@ -13,7 +13,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         filename: 'index.bundle.js',
     },
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     devServer: {
         static: './src',
         hot: true,

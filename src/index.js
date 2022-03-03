@@ -1,7 +1,7 @@
 //import js套件
 import 'jquery';
 import "bootstrap";
-import 'datatables.net-dt';
+import 'datatables.net';
 import 'datatables.net-responsive-dt';
 
 //import scss

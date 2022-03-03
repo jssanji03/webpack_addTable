@@ -13,12 +13,7 @@ const formContent = document.querySelector(".js-content")
 const formCheck = document.querySelectorAll("input[name=OK-check]")
 const formPublish = document.querySelectorAll("input[name=Options]")
 const inputs = document.querySelectorAll("input[type=text],input[type=number],input[type=date],select,textarea");
-
-const addForm = function add() {
-    addFormToList.addEventListener("click", checkNewTicket)
-}
-function checkNewTicket() {
-    const constraints = {
+const constraints = {
         "日期": {
             presence: {
                 message: "必填欄位"
@@ -38,21 +33,38 @@ function checkNewTicket() {
             presence: {
                 message: "必填欄位"
             },
-            numericality: {
-                greaterThan: 0,
-                message: "必須大於 0"
-            }
         },
         "內容": {
             presence: {
                 message: "必填欄位"
             },
-            numericality: {
-                greaterThan: 0,
-                message: "必須大於 0"
-            }
         },
-    };
+};
+    
+const addForm = function add() {
+    addFormToList.addEventListener("click", checkNewTicket)
+}
+
+function handleFormSubmit(formArea, input) {
+    const errors = validate(formArea, constraints);// validate the form aainst the constraints
+    showErrors(form, errors || {}); // then we update the form to reflect the results
+    if (!errors) {
+      addNewList();
+    }
+}
+
+// Updates the inputs with the validation errors
+function showErrors(form, errors) {
+  // We loop through all the inputs and show the errors for that input
+  _.each(form.querySelectorAll("input[name], select[name]"), function(input) {
+    // Since the errors can be null if no errors were found we need to handle
+    // that
+    showErrorsForInput(input, errors && errors[input.name]);
+  });
+}
+
+function checkNewTicket(e) {
+    e.preventDefault();
     if (formDate.value == "" || 
         formDept.value == "" ||
         formCustomer.value == "" ||
@@ -61,18 +73,22 @@ function checkNewTicket() {
         formCheck.value == "" || 
         formPublish.value == "") {
         inputs.forEach((item) => {
-        item.nextElementSibling.textContent = "";
-            let errors = validate(formArea, constraints)
             //呈現在畫面上
+            let errors = validate(formArea, constraints)
             if(errors){
+                item.nextElementSibling.textContent = "";
                 // console.log(Object.keys(errors)) //keys -> 屬性
                 Object.keys(errors).forEach(function(keys) {
                     document.querySelector(`[data-message="${keys}"]`).textContent = errors[keys]
                 })
+            } 
+            item.addEventListener("change", () => {
+                if(errors){
+                item.nextElementSibling.textContent = "";
             }
-    })
-    } 
-    else {
+            })
+        })
+    }else {
         addNewList()
     }
 }
