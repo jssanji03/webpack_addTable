@@ -2,6 +2,8 @@
 ![](https://github.com/jssanji03/webpack_addTable/blob/main/demo_3.png?raw=true "完成圖")
 
 # [ Add Table]
+[線上Demo](https://jssanji03.github.io/webpack_addTable/)
+
 從上表輸入完成後，即可加入至下方表格，並產生一組 json Array。
 
 ## 其他操作說明
