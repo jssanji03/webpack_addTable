@@ -1,6 +1,6 @@
 
 const validate = require("validate.js");
-import { dataTableResponsive } from '../js/component';
+import { dataTableRWD } from '../js/component';
 
 let data = []
 const formArea = document.querySelector(".js-addForm")
@@ -45,23 +45,6 @@ const addForm = function add() {
     addFormToList.addEventListener("click", checkNewTicket)
 }
 
-function handleFormSubmit(formArea, input) {
-    const errors = validate(formArea, constraints);// validate the form aainst the constraints
-    showErrors(form, errors || {}); // then we update the form to reflect the results
-    if (!errors) {
-      addNewList();
-    }
-}
-
-// Updates the inputs with the validation errors
-function showErrors(form, errors) {
-  // We loop through all the inputs and show the errors for that input
-  _.each(form.querySelectorAll("input[name], select[name]"), function(input) {
-    // Since the errors can be null if no errors were found we need to handle
-    // that
-    showErrorsForInput(input, errors && errors[input.name]);
-  });
-}
 
 function checkNewTicket(e) {
     e.preventDefault();
@@ -115,7 +98,7 @@ function addNewList() {
     data.push(obj)
     console.log(data);
     init()
-    dataTableResponsive()
+    dataTableRWD
     formArea.reset()
 }
 

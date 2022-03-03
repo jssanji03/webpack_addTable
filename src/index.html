@@ -45,12 +45,6 @@
                                 <form class="js-addForm">
                                     <div class="row">
                                         <div class="mb-2 col-lg-3 col-md-6 col-12">
-                                            <label class="form-label">數量:</label>
-                                            <input type="number" inputmode="decimal" class="form-control form-control-sm js-date" name="singleDate"
-                                                type="date">
-                                            <p class="form-message" data-message="日期"></p>
-                                        </div>
-                                        <div class="mb-2 col-lg-3 col-md-6 col-12">
                                             <label class="form-label">日期:</label>
                                             <input class="form-control form-control-sm js-date" name="singleDate"
                                                 type="date">
@@ -82,6 +76,16 @@
                                                 <p class="form-message" data-message="客戶名稱"></p>
                                             </div>
                                         </div>
+                                        <!--  計數器  -->
+                                        <!-- <div class="mb-2 col-lg-3 col-md-6 col-12">
+                                            <label class="form-label">計數器:</label>
+                                            <div class="input-group">
+                                                <button class="btn custom-btn js-minus" type="button">-</button>
+                                                <input type="number" class="js-num price form-control" name="price" id="price" value="1" min="0" max="10"
+                                                    oninput="if(value>10)value=10;if(value<0)value=0;value=value.replace(/[^\d]/g,'')" />
+                                                <button class="btn custom-btn js-add " type="button">+</button>
+                                            </div>
+                                        </div> -->
                                         <!--  地址 magicsuggest plugins  -->
                                         <div class="mb-2 col-12">
                                             <label class="form-label">地址:</label>

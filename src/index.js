@@ -12,6 +12,7 @@ import './scss/index.scss';
 import './js/sidebar'
 import { sidebar } from './js/menu';
 import { addForm } from './pages/addTable';
+import { addCart } from './js/component';
 
 
 sidebar()
