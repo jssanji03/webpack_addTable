@@ -3418,9 +3418,12 @@ $(document).ready(function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addForm": () => (/* binding */ addForm)
+/* harmony export */   "addForm": () => (/* binding */ addForm),
+/* harmony export */   "deletedItem": () => (/* binding */ deletedItem),
+/* harmony export */   "editItem": () => (/* binding */ editItem)
 /* harmony export */ });
 /* harmony import */ var _js_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../js/component */ "./src/js/component.js");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 var validate = __webpack_require__(/*! validate.js */ "./node_modules/validate.js/validate.js");
 
 
@@ -3435,6 +3438,7 @@ var formContent = document.querySelector(".js-content");
 var formCheck = document.querySelectorAll("input[name=OK-check]");
 var formPublish = document.querySelectorAll("input[name=Options]");
 var inputs = document.querySelectorAll("input[type=text],input[type=number],input[type=date],select,textarea");
+var editAreaSave = document.querySelector(".js-editSave");
 var constraints = {
   "日期": {
     presence: {
@@ -3494,9 +3498,11 @@ function checkNewTicket(e) {
   }
 }
 
+var i = 0;
+
 function addNewList() {
   var obj = {};
-  obj.id = data.length;
+  obj.id = ++i;
   obj.date = formDate.value;
   obj.dept = formDept.value;
   obj.customer = formCustomer.value;
@@ -3514,20 +3520,63 @@ function addNewList() {
     }
   });
   data.push(obj);
-  console.log(data);
   init();
   _js_component__WEBPACK_IMPORTED_MODULE_0__.dataTableRWD;
   formArea.reset();
+  console.log("addNewList", data);
 }
 
 function init() {
   var str = "";
   data.forEach(function (items) {
     var tableArea = document.querySelector(".tableArea");
-    str += "\n                <tr>\n                    <td>".concat(items.date, "</td>\n                    <td>").concat(items.dept, "</td>\n                    <td>").concat(items.customer, "</td>\n                    <td>").concat(items.address, "</td>\n                    <td>").concat(items.content, "</td>\n                    <td>").concat(items.check, "</td>\n                    <td>").concat(items.publish, "</td>\n                </tr>\n        ");
+    str += "\n                <tr data-id=\"".concat(items.id, "\">\n                    <td>").concat(items.date, "</td>\n                    <td>").concat(items.dept, "</td>\n                    <td>").concat(items.customer, "</td>\n                    <td>").concat(items.address, "</td>\n                    <td>").concat(items.content, "</td>\n                    <td>").concat(items.check, "</td>\n                    <td>").concat(items.publish, "</td>\n                    <td><i class=\"fa-solid fa-pen-to-square mx-2 js-edit\"data-bs-toggle=\"modal\" data-bs-target=\"#editModal\"></i><i class=\"fa-solid fa-trash-can js-delete\"></i></td>\n                </tr>\n        ");
     tableArea.innerHTML = str;
   });
 }
+
+var deletedItem = function deletedItem() {
+  $(document).on('click', '.js-delete', function (e) {
+    var selected = $(this).parents("tr").attr("data-id");
+
+    if (confirm("確定刪除嗎?")) {
+      e.target.parentNode.parentNode.remove();
+      data = data.filter(function (item) {
+        return item.id !== Number(selected);
+      });
+      console.log("deletedItem", data);
+    }
+  });
+};
+
+var editItem = function editItem() {
+  $(document).on('click', '.js-edit', function (e) {
+    var selectedId = $(this).parents("tr").attr("data-id"); // const currentItem = data[selectedId]
+
+    data.forEach(function (item, index) {
+      if (item.id == Number(selectedId)) {
+        document.querySelector(".js-editDate").value = item.date;
+        document.querySelector(".js-editDept").value = item.dept;
+        document.querySelector(".js-editCustomer").value = item.customer;
+        document.querySelector(".js-editAddress").value = item.address;
+        document.querySelector(".js-editContent").value = item.content;
+        document.querySelector(".js-editSave").dataset.id = item.id;
+        editAreaSave.addEventListener("click", function (e) {
+          var dataID = e.target.getAttribute('data-id');
+
+          if (item.id == dataID) {
+            item.date = document.querySelector(".js-editDate").value;
+            item.dept = document.querySelector(".js-editDept").value;
+            item.customer = document.querySelector(".js-editCustomer").value;
+            item.address = document.querySelector(".js-editAddress").value;
+            item.content = document.querySelector(".js-editContent").value;
+            init();
+          }
+        });
+      }
+    });
+  });
+};
 
 
 
@@ -37694,7 +37743,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_sidebar__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_js_sidebar__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _js_menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/menu */ "./src/js/menu.js");
 /* harmony import */ var _pages_addTable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/addTable */ "./src/pages/addTable.js");
-/* harmony import */ var _js_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/component */ "./src/js/component.js");
 //import js套件
 
 
@@ -37705,10 +37753,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // import './pages/addTable';
 
 (0,_js_menu__WEBPACK_IMPORTED_MODULE_6__.sidebar)();
 (0,_pages_addTable__WEBPACK_IMPORTED_MODULE_7__.addForm)();
+(0,_pages_addTable__WEBPACK_IMPORTED_MODULE_7__.deletedItem)();
+(0,_pages_addTable__WEBPACK_IMPORTED_MODULE_7__.editItem)();
 
 if (false) {}
 })();

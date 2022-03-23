@@ -8603,6 +8603,8 @@ table {
 
 .tableArea td {
   font-size: 12px; }
+  .tableArea td i {
+    cursor: pointer; }
 
 .changColor {
   background-color: #868686; }
