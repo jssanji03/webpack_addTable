@@ -13,6 +13,10 @@ const formContent = document.querySelector(".js-content")
 const formCheck = document.querySelectorAll("input[name=OK-check]")
 const formPublish = document.querySelectorAll("input[name=Options]")
 const inputs = document.querySelectorAll("input[type=text],input[type=number],input[type=date],select,textarea");
+const editAreaSave = document.querySelector(".js-editSave")
+
+
+
 const constraints = {
         "日期": {
             presence: {
@@ -45,7 +49,6 @@ const addForm = function add() {
     addFormToList.addEventListener("click", checkNewTicket)
 }
 
-
 function checkNewTicket(e) {
     e.preventDefault();
     if (formDate.value == "" || 
@@ -75,9 +78,10 @@ function checkNewTicket(e) {
         addNewList()
     }
 }
+let i = 0
 function addNewList() {
     let obj = {}
-    obj.id = data.length
+    obj.id = ++i
     obj.date = formDate.value
     obj.dept = formDept.value
     obj.customer = formCustomer.value
@@ -96,10 +100,10 @@ function addNewList() {
         }
     })
     data.push(obj)
-    console.log(data);
     init()
     dataTableRWD
     formArea.reset()
+    console.log("addNewList",data);
 }
 
 function init() {
@@ -107,7 +111,7 @@ function init() {
     data.forEach(function (items) {
         const tableArea = document.querySelector(".tableArea")
         str += `
-                <tr>
+                <tr data-id="${items.id}">
                     <td>${items.date}</td>
                     <td>${items.dept}</td>
                     <td>${items.customer}</td>
@@ -115,10 +119,51 @@ function init() {
                     <td>${items.content}</td>
                     <td>${items.check}</td>
                     <td>${items.publish}</td>
+                    <td><i class="fa-solid fa-pen-to-square mx-2 js-edit"data-bs-toggle="modal" data-bs-target="#editModal"></i><i class="fa-solid fa-trash-can js-delete"></i></td>
                 </tr>
         `
         tableArea.innerHTML = str;
     })
 }
+const deletedItem =  () => {
+    $(document).on('click', '.js-delete', function (e) {
+        const selected = $(this).parents("tr").attr("data-id")
+        if (confirm("確定刪除嗎?")) {
+            e.target.parentNode.parentNode.remove()
+            data = data.filter(function (item) {
+                return item.id !== Number(selected)
+            })
+            console.log("deletedItem",data);
+        }
+    })
+}
+const editItem =  () => {
+    $(document).on('click', '.js-edit', function (e) {
+        const selectedId = $(this).parents("tr").attr("data-id")
+        // const currentItem = data[selectedId]
+        data.forEach((item, index) => {
+            if (item.id == Number(selectedId)) {
+                document.querySelector(".js-editDate").value = item.date
+                document.querySelector(".js-editDept").value = item.dept
+                document.querySelector(".js-editCustomer").value = item.customer
+                document.querySelector(".js-editAddress").value = item.address
+                document.querySelector(".js-editContent").value = item.content
+                document.querySelector(".js-editSave").dataset.id = item.id
+                editAreaSave.addEventListener("click", (e) => {
+                    const dataID = e.target.getAttribute('data-id');
+                    if (item.id == dataID) {
+                        item.date = document.querySelector(".js-editDate").value 
+                        item.dept = document.querySelector(".js-editDept").value
+                        item.customer = document.querySelector(".js-editCustomer").value
+                        item.address = document.querySelector(".js-editAddress").value 
+                        item.content = document.querySelector(".js-editContent").value
+                        init()
+                    }
+                })
+            }
+        })
+    })
+}
 
-export  { addForm };
+
+export  { addForm,deletedItem,editItem };

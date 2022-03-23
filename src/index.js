@@ -10,12 +10,14 @@ import './scss/index.scss';
 //import 共用 js
 import './js/sidebar'
 import { sidebar } from './js/menu';
-import { addForm } from './pages/addTable';
-import { addCart } from './js/component';
+import { addForm,deletedItem,editItem} from './pages/addTable';
+// import './pages/addTable';
 
 
 sidebar()
 addForm()
+deletedItem()
+editItem()
 if (module.hot) {
     module.hot.accept();
  }

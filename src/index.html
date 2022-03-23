@@ -157,6 +157,7 @@
                                         <th scope="col">內容</th>
                                         <th scope="col">複選</th>
                                         <th scope="col">是否發布</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="tableArea">
@@ -169,6 +170,95 @@
             </section>
         </div>
         <!-- /#page-content-wrapper -->
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">編輯</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="js-editForm">
+                        <div class="row">
+                            <div class="mb-2 col-lg-3 col-md-6 col-12">
+                                <label class="form-label">日期:</label>
+                                <input class="form-control form-control-sm js-editDate" name="singleDate" type="date">
+                                <p class="form-message" data-message="日期"></p>
+                            </div>
+                            <!--  部門  -->
+                            <div class="mb-2 col-lg-3 col-md-6 col-12">
+                                <label class="form-label">部門:</label>
+                                <div class="col-12 p-0">
+                                    <select class="form-select form-select-sm js-editDept">
+                                        <option selected disabled hidden>Open this select menu</option>
+                                        <option value="One">One</option>
+                                        <option value="Two">Two</option>
+                                        <option value="Three">Three</option>
+                                    </select>
+                                    <p class="form-message" data-message="部門"></p>
+                                </div>
+                            </div>
+                            <!--  客戶  -->
+                            <div class="mb-2 col-lg-3 col-md-6 col-12">
+                                <label class="form-label">客戶名稱:</label>
+                                <div class="col-12 p-0">
+                                    <select class="form-select form-select-sm js-editCustomer">
+                                        <option disabled selected hidden>Open this select menu</option>
+                                        <option value="A">Ａ</option>
+                                        <option value="B">Ｂ</option>
+                                        <option value="C">Ｃ</option>
+                                    </select>
+                                    <p class="form-message" data-message="客戶名稱"></p>
+                                </div>
+                            </div>
+                            <!--  地址 magicsuggest plugins  -->
+                            <div class="mb-2 col-12">
+                                <label class="form-label">地址:</label>
+                                <input class="form-control form-control-sm js-editAddress" type="text" style="width: 100%;">
+                                </input>
+                                <p class="form-message" data-message="地址"></p>
+                            </div>
+                            <!--  故障內容  -->
+                            <div class="mb-2 col-12">
+                                <div class="form-group col-lg-12">
+                                    <label class="col-12 form-label" for="fixedArea">內容:</label>
+                                    <textarea class="form-control col-12 js-editContent" cols=10 rows="4" maxlength="700"></textarea>
+                                    <p class="form-message" data-message="內容"></p>
+                                </div>
+                            </div>
+                            <div class="mb-1 col-lg-3 col-md-6 col-12">
+                                <label class="col-12 form-label" for="fixedArea">複選:</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="OK-check" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">選擇1</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="OK-check" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">選擇2</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <label class="col-12 form-label" for="fixedArea">是否發布:</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="Options" id="inlineRadio1" value="true">
+                                    <label class="form-check-label" for="inlineRadio1">是</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="Options" id="inlineRadio2" value="false">
+                                    <label class="form-check-label" for="inlineRadio2">否</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-primary js-editSave" data-id="">儲存</button>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- ##### Header Area End ##### -->
 </body>
