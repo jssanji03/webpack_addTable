@@ -3279,7 +3279,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var sidebarArea = document.querySelector('#sidebar-wrapper');
 var sidebar = function sidebar() {
-  var template = "\n    <ul class=\"navbar-nav\">\n        <li class=\"nav-item\"><a href=\"index.html\" class=\"nav-link\"><i class=\"fa-icon fas fa-home \"></i> index</a></li>\n    </ul>\n    ";
+  var template = "\n    <ul class=\"navbar-nav\">\n        <li class=\"nav-item\">\n            <a href=\"index.html\" class=\"nav-link\"><i class=\"fa-icon fas fa-home \"></i> index</a>\n        </li>\n    </ul>\n    ";
   sidebarArea.innerHTML = template;
 };
 
@@ -3475,6 +3475,7 @@ function checkNewTicket(e) {
   e.preventDefault();
 
   if (formDate.value == "" || formDept.value == "" || formCustomer.value == "" || formAddress.value == "" || formContent.value == "" || formCheck.value == "" || formPublish.value == "") {
+    console.log(formAddress.value);
     inputs.forEach(function (item) {
       //呈現在畫面上
       var errors = validate(formArea, constraints);

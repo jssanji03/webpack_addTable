@@ -8713,7 +8713,7 @@ table {
     position: fixed;
     right: 0;
     top: 0;
-    margin-left: 12vw;
+    left: 12vw;
     width: 88vw;
     height: 50px;
     z-index: 999;
