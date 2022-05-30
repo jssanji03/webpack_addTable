@@ -58,6 +58,7 @@ function checkNewTicket(e) {
         formContent.value == "" ||
         formCheck.value == "" || 
         formPublish.value == "") {
+        console.log(formAddress.value);
         inputs.forEach((item) => {
             //呈現在畫面上
             let errors = validate(formArea, constraints)
